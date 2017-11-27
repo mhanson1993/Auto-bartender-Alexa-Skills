@@ -45,17 +45,18 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             googleRequestJson = json.loads(googleRequest)
             ESPparameters = {}
             command = googleRequestJson['request']['intent']['slots']
-            if 'value' in command['question'].keys():
+            if 'value' in command['Question'].keys():
                     ESPparameters['query'] = '?'
             else:
                 ESPparameters['query'] = 'cmd'
 
-            if 'open' in command['state']['value']:
-                ESPparameters['state'] = command['state']['value']
-            elif 'close' in command['state']['value']:
-                ESPparameters['state'] = command['state']['value']
+            if 'value' in command['Drink'].keys():
+                ESPparameters['drink'] = command['Drink']['value']
+            elif 'value' in command['Liquor'].keys():
+                ESPparameters['liquor'] = command['Liquor']['value']
+                ESPparameters['mixer'] = command['Mixer']['value']
 
-            ESPparameters['instance'] = command['instance']['value']
+            # ESPparameters['instance'] = command['instance']['value']
             # {"instance": "1", "state": "open", "query":"?"}
             # {"instance": "both", "state": "close", "query":"cmd"}
 
