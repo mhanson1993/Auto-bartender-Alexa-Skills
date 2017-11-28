@@ -49,12 +49,14 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
                     ESPparameters['query'] = '?'
             else:
                 ESPparameters['query'] = 'cmd'
-
+                
             if 'value' in command['Drink'].keys():
                 ESPparameters['drink'] = command['Drink']['value']
+                ESPparameters['state'] = 'predef'
             elif 'value' in command['Liquor'].keys():
                 ESPparameters['liquor'] = command['Liquor']['value']
                 ESPparameters['mixer'] = command['Mixer']['value']
+                ESPparameters['state'] = 'mix'
 
             # ESPparameters['instance'] = command['instance']['value']
             # {"instance": "1", "state": "open", "query":"?"}
